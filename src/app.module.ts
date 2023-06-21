@@ -10,6 +10,6 @@ import { ScheduleModule } from '@nestjs/schedule';
 @Module({
   imports: [SerialModule, SocketModule, ScheduleModule.forRoot()],
   controllers: [AppController],
-  providers: [AppService, Serial1Service, Serial2Service],
+  providers: [AppService],
 })
 export class AppModule { }
