@@ -1,12 +1,18 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { SerialPort } from 'serialport';
 import { DelimiterParser } from '@serialport/parser-delimiter';
+import { Cron, CronExpression } from '@nestjs/schedule';
 import { SocketService } from 'src/socket/socket.service';
 
+interface Payload {
+  data: any[];
+  dt: Date | string;
+}
 @Injectable()
 export class Serial1Service {
   private device;
   private deviceParser;
+  private payload: Payload[];
   private logger = new Logger('Vibration Sensor');
   constructor(private socket: SocketService) {
     try {
@@ -23,14 +29,18 @@ export class Serial1Service {
     }
   }
 
+  @Cron(CronExpression.EVERY_10_SECONDS)
+  fakeData() {
+    this.socket.send('vibration', JSON.stringify(this.payload));
+    this.payload = [];
+  }
+
   onDeviceData(data: any) {
     //wconsole.log('data: ', data.toString());
     const payload = data.toString().split(',');
-
-    const message = {
+    this.payload.push({
       data: payload,
       dt: new Date(),
-    };
-    this.socket.send('vibration', JSON.stringify(message));
+    });
   }
 }
