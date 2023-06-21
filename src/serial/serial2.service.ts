@@ -43,7 +43,7 @@ export class Serial2Service {
       if (stdout[16] === '0' && !this.button1) {
         this.button1 = true;
         console.log('button1 pressed');
-        this.socket.send('fuel', 'testOK');
+        this.socket.send('pressure', 'testOK');
       } else {
         this.button1 = false;
       }
