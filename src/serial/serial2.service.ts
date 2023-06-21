@@ -49,7 +49,7 @@ export class Serial2Service {
       }
       return null;
     });
-    exec(`sudo gpio-test.64 r b 13`, (error, stdout, stderr) => {
+    exec(`sudo gpio-test.64 r h 13`, (error, stdout, stderr) => {
       if (error) {
         this.logger.error(`error: ${error.message}`);
         return error.message;
