@@ -1,13 +1,14 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { SerialPort } from 'serialport';
 import { DelimiterParser } from '@serialport/parser-delimiter';
+import { SocketService } from 'src/socket/socket.service';
 
 @Injectable()
 export class Serial2Service {
   private device;
   private deviceParser;
   private logger = new Logger('Serial SENSORS Device');
-  constructor() {
+  constructor(private socket: SocketService) {
     try {
       this.device = new SerialPort({
         path: '/dev/ttyS3',
@@ -23,8 +24,8 @@ export class Serial2Service {
   }
 
   onDeviceData(data: any) {
-    //console.log('data: ', data.toString());
-    const payload = JSON.parse(data.toString());
+    const payload = data.toString();
     this.logger.log('sensor payload', payload);
+    this.socket.send('sensor', payload);
   }
 }

@@ -38,6 +38,12 @@ export class Serial1Service {
   onDeviceData(data: any) {
     //wconsole.log('data: ', data.toString());
     const payload = data.toString().split(',');
+
+    const message = {
+      data: payload,
+      dt: new Date(),
+    };
+    this.socket.send('vibration', JSON.stringify(message));
     // this.logger.log('ax', payload[0]);
     // this.logger.log('ay', payload[1]);
     // this.logger.log('az', payload[2]);
