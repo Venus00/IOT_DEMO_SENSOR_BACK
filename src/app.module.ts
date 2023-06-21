@@ -9,4 +9,4 @@ import { ScheduleModule } from '@nestjs/schedule';
   controllers: [],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}
