@@ -23,9 +23,11 @@ export class Serial2Service {
     } catch (error) {
       console.log(error);
     }
+    setInterval(() => {
+      this.readButton();
+    }, 100);
   }
-  @Cron(CronExpression.EVERY_SECOND)
-  fakeData() {
+  readButton() {
     exec(`sudo gpio-test.64 r b 2`, (error, stdout, stderr) => {
       if (error) {
         this.logger.error(`error: ${error.message}`);
@@ -53,6 +55,7 @@ export class Serial2Service {
   }
 
   onDeviceData(data: any) {
+
     const payload = data.toString();
     this.logger.log('sensor payload', payload);
     this.socket.send('sensor', payload);
