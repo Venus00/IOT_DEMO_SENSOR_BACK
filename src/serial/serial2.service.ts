@@ -53,7 +53,7 @@ export class Serial2Service {
         return null;
       }
       this.logger.log(stdout);
-      if (stdout === '0') {
+      if (stdout === '1') {
         console.log('button pressed');
       }
       return null;
