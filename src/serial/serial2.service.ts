@@ -60,7 +60,7 @@ export class Serial2Service {
       }
       this.logger.log(stdout[16]);
       if (stdout[16] === '1' && !this.button2) {
-        this.button1 = true;
+        this.button2 = true;
         console.log('button2 pressed');
       } else {
         this.button2 = false;
