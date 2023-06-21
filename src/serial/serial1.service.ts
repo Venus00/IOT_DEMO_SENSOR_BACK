@@ -38,8 +38,8 @@ export class Serial1Service {
   onDeviceData(data: any) {
     //wconsole.log('data: ', data.toString());
     const payload = data.toString().split(',');
-    this.logger.log('ax', payload[0]);
-    this.logger.log('ay', payload[1]);
-    this.logger.log('az', payload[2]);
+    // this.logger.log('ax', payload[0]);
+    // this.logger.log('ay', payload[1]);
+    // this.logger.log('az', payload[2]);
   }
 }

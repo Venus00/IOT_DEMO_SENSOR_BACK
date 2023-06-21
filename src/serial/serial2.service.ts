@@ -23,7 +23,7 @@ export class Serial2Service {
   }
 
   onDeviceData(data: any) {
-    console.log('data: ', data.toString());
+    //console.log('data: ', data.toString());
     const payload = JSON.parse(data.toString());
     this.logger.log('sensor payload', payload);
   }
