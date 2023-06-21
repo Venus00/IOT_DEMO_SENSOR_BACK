@@ -35,6 +35,7 @@ export class Serial2Service {
         this.logger.error(`stderr: ${stderr}`);
         return null;
       }
+      this.logger.log(stdout);
       return null;
     });
     exec(`sudo gpio-test.64 r b 3`, (error, stdout, stderr) => {
@@ -46,6 +47,7 @@ export class Serial2Service {
         this.logger.error(`stderr: ${stderr}`);
         return null;
       }
+      this.logger.log(stdout);
       return null;
     });
   }
