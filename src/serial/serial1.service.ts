@@ -15,7 +15,7 @@ export class Serial1Service {
         baudRate: 115200,
       });
       this.deviceParser = this.device.pipe(
-        new DelimiterParser({ delimiter: '\n' }),
+        new DelimiterParser({ delimiter: '\r\n' }),
       );
       this.deviceParser.on('data', this.onDeviceData.bind(this));
     } catch (error) {
