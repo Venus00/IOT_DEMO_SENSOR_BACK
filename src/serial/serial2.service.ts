@@ -40,8 +40,8 @@ export class Serial2Service {
         this.logger.error(`stderr: ${stderr}`);
         return null;
       }
-      this.logger.log(stdout[0]);
-      if (stdout[0] === '0' && !this.button1) {
+      this.logger.log(stdout[16]);
+      if (stdout[16] === '0' && !this.button1) {
         this.button1 = true;
         console.log('button pressed');
       } else {
@@ -58,8 +58,8 @@ export class Serial2Service {
         this.logger.error(`stderr: ${stderr}`);
         return null;
       }
-      this.logger.log(stdout[0]);
-      if (stdout[0] === '0' && !this.button2) {
+      this.logger.log(stdout[16]);
+      if (stdout[16] === '0' && !this.button2) {
         this.button1 = true;
         console.log('button pressed');
       } else {
