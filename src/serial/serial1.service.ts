@@ -12,7 +12,7 @@ export class Serial1Service {
   constructor(private socket: SocketService) {
     try {
       this.device = new SerialPort({
-        path: '/dev/ttyS1',
+        path: '/dev/ttyS2',
         baudRate: 115200,
       });
       this.deviceParser = this.device.pipe(

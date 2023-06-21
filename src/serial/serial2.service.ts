@@ -10,7 +10,7 @@ export class Serial2Service {
   constructor() {
     try {
       this.device = new SerialPort({
-        path: '/dev/ttyS2',
+        path: '/dev/ttyS1',
         baudRate: 115200,
       });
       this.deviceParser = this.device.pipe(
