@@ -2,6 +2,8 @@ import { Injectable, Logger } from '@nestjs/common';
 import { SerialPort } from 'serialport';
 import { DelimiterParser } from '@serialport/parser-delimiter';
 import { SocketService } from 'src/socket/socket.service';
+import { Cron, CronExpression } from '@nestjs/schedule';
+import { exec } from 'child_process';
 
 @Injectable()
 export class Serial2Service {
@@ -21,6 +23,31 @@ export class Serial2Service {
     } catch (error) {
       console.log(error);
     }
+  }
+  @Cron(CronExpression.EVERY_SECOND)
+  fakeData() {
+    exec(`sudo gpio-test.64 r b 2`, (error, stdout, stderr) => {
+      if (error) {
+        this.logger.error(`error: ${error.message}`);
+        return error.message;
+      }
+      if (stderr) {
+        this.logger.error(`stderr: ${stderr}`);
+        return null;
+      }
+      return null;
+    });
+    exec(`sudo gpio-test.64 r b 3`, (error, stdout, stderr) => {
+      if (error) {
+        this.logger.error(`error: ${error.message}`);
+        return error.message;
+      }
+      if (stderr) {
+        this.logger.error(`stderr: ${stderr}`);
+        return null;
+      }
+      return null;
+    });
   }
 
   onDeviceData(data: any) {

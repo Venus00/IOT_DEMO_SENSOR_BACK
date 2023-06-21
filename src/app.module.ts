@@ -9,8 +9,7 @@ import { join } from 'path';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', '..', 'IOT_DEMO_SENSOR_BACK', 'build'),
-      exclude: ['/api/(.*)'],
+      rootPath: join(__dirname, '..', '..', 'IOT_DEMO_SENSOR_FRONT', 'build'),
     }),
     SerialModule,
     SocketModule,
