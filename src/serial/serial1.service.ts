@@ -12,7 +12,7 @@ interface Payload {
 export class Serial1Service {
   private device;
   private deviceParser;
-  private payload: Payload[];
+  private payload: Payload[] = [];
   private logger = new Logger('Vibration Sensor');
   constructor(private socket: SocketService) {
     try {
@@ -29,7 +29,7 @@ export class Serial1Service {
     }
   }
 
-  @Cron(CronExpression.EVERY_10_SECONDS)
+  @Cron(CronExpression.EVERY_SECOND)
   fakeData() {
     this.socket.send('vibration', JSON.stringify(this.payload));
     this.payload = [];
