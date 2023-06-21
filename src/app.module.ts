@@ -25,4 +25,4 @@ import { join } from 'path';
   controllers: [],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}
