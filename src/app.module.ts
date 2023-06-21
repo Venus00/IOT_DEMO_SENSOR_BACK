@@ -9,7 +9,14 @@ import { join } from 'path';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', '..', 'IOT_DEMO_SENSOR_FRONT', 'build'),
+      rootPath: join(
+        __dirname,
+        '..',
+        '..',
+        '..',
+        'IOT_DEMO_SENSOR_FRONT',
+        'build',
+      ),
     }),
     SerialModule,
     SocketModule,
@@ -18,4 +25,4 @@ import { join } from 'path';
   controllers: [],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
