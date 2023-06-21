@@ -28,7 +28,7 @@ export class Serial2Service {
     }, 100);
   }
   readButton() {
-    exec(`sudo gpio-test.64 r b 2`, (error, stdout, stderr) => {
+    exec(`sudo gpio-test.64 r h 19`, (error, stdout, stderr) => {
       if (error) {
         this.logger.error(`error: ${error.message}`);
         return error.message;
@@ -38,9 +38,12 @@ export class Serial2Service {
         return null;
       }
       this.logger.log(stdout);
+      if (stdout === '0') {
+        console.log('button pressed');
+      }
       return null;
     });
-    exec(`sudo gpio-test.64 r b 3`, (error, stdout, stderr) => {
+    exec(`sudo gpio-test.64 r b 13`, (error, stdout, stderr) => {
       if (error) {
         this.logger.error(`error: ${error.message}`);
         return error.message;
@@ -50,12 +53,14 @@ export class Serial2Service {
         return null;
       }
       this.logger.log(stdout);
+      if (stdout === '0') {
+        console.log('button pressed');
+      }
       return null;
     });
   }
 
   onDeviceData(data: any) {
-
     const payload = data.toString();
     this.logger.log('sensor payload', payload);
     this.socket.send('sensor', payload);
