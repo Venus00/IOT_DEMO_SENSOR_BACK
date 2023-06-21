@@ -24,17 +24,17 @@ export class Serial1Service {
     }
   }
 
-  @Cron(CronExpression.EVERY_10_SECONDS)
-  fakeData() {
-    const paylaod = {
-      ax: Math.floor(Math.random() * 10),
-      ay: Math.floor(Math.random() * 10),
-      az: Math.floor(Math.random() * 10),
-      dt: new Date(),
-    };
-    this.logger.log(paylaod);
-    this.socket.send('vibration', JSON.stringify(paylaod));
-  }
+  // @Cron(CronExpression.EVERY_10_SECONDS)
+  // fakeData() {
+  //   const paylaod = {
+  //     ax: Math.floor(Math.random() * 10),
+  //     ay: Math.floor(Math.random() * 10),
+  //     az: Math.floor(Math.random() * 10),
+  //     dt: new Date(),
+  //   };
+  //   this.logger.log(paylaod);
+  //   this.socket.send('vibration', JSON.stringify(paylaod));
+  // }
   onDeviceData(data: any) {
     console.log('data: ', data.toString());
     const payload = data.toString().split(',');
