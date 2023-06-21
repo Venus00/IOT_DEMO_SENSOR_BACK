@@ -10,18 +10,18 @@ export class Serial1Service {
   private deviceParser;
   private logger = new Logger('Vibration Sensor');
   constructor(private socket: SocketService) {
-    // try {
-    //   this.device = new SerialPort({
-    //     path: '/dev/ttyS2',
-    //     baudRate: 115200,
-    //   });
-    //   this.deviceParser = this.device.pipe(
-    //     new DelimiterParser({ delimiter: '\n' }),
-    //   );
-    //   this.deviceParser.on('data', this.onDeviceData.bind(this));
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      this.device = new SerialPort({
+        path: '/dev/ttyS1',
+        baudRate: 115200,
+      });
+      this.deviceParser = this.device.pipe(
+        new DelimiterParser({ delimiter: '\n' }),
+      );
+      this.deviceParser.on('data', this.onDeviceData.bind(this));
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   @Cron(CronExpression.EVERY_10_SECONDS)

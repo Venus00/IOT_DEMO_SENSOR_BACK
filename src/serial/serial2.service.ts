@@ -8,18 +8,18 @@ export class Serial2Service {
   private deviceParser;
   private logger = new Logger('Serial SENSORS Device');
   constructor() {
-    // try {
-    //   this.device = new SerialPort({
-    //     path: '/dev/ttyS2',
-    //     baudRate: 115200,
-    //   });
-    //   this.deviceParser = this.device.pipe(
-    //     new DelimiterParser({ delimiter: '\n' }),
-    //   );
-    //   this.deviceParser.on('data', this.onDeviceData.bind(this));
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    try {
+      this.device = new SerialPort({
+        path: '/dev/ttyS2',
+        baudRate: 115200,
+      });
+      this.deviceParser = this.device.pipe(
+        new DelimiterParser({ delimiter: '\n' }),
+      );
+      this.deviceParser.on('data', this.onDeviceData.bind(this));
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   onDeviceData(data: any) {
