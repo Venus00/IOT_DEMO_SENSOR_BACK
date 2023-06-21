@@ -15,7 +15,7 @@ import { join } from 'path';
         '..',
         '..',
         'IOT_DEMO_SENSOR_FRONT',
-        'build',
+        'dist',
       ),
     }),
     SerialModule,
