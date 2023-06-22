@@ -8,6 +8,7 @@ interface Payload {
   data: any[];
   dt: Date | string;
 }
+
 @Injectable()
 export class Serial1Service {
   private device;
@@ -27,17 +28,27 @@ export class Serial1Service {
     } catch (error) {
       console.log(error);
     }
-  }
 
-  @Cron(CronExpression.EVERY_SECOND)
+    setInterval(() => {
+      this.fakeData();
+    }, 100);
+  }
   fakeData() {
     this.socket.send('vibration', JSON.stringify(this.payload));
     this.payload = [];
   }
 
+  // @Cron(CronExpression.EVERY_SECOND)
+  // fakeData() {
+  //   this.socket.send('vibration', JSON.stringify(this.payload));
+  //   this.payload = [];
+  // }
+
   onDeviceData(data: any) {
     //wconsole.log('data: ', data.toString());
     const payload = data.toString().split(',');
+    this.socket.send('vibration', JSON.stringify(this.payload));
+
     const date = new Date();
     this.payload.push({
       data: payload,
