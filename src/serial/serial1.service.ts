@@ -5,15 +5,22 @@ import { Cron, CronExpression } from '@nestjs/schedule';
 import { SocketService } from 'src/socket/socket.service';
 
 interface Payload {
-  data: any[];
-  dt: Date | string;
+  ax: any[];
+  ay: any[];
+  az: any[];
+  dt: any[];
 }
 
 @Injectable()
 export class Serial1Service {
   private device;
   private deviceParser;
-  private payload: Payload[] = [];
+  private payload: Payload = {
+    ax: [],
+    ay: [],
+    az: [],
+    dt: [],
+  };
   private logger = new Logger('Vibration Sensor');
   constructor(private socket: SocketService) {
     try {
@@ -41,8 +48,10 @@ export class Serial1Service {
   @Cron(CronExpression.EVERY_SECOND)
   fakeData() {
     this.socket.send('vibration', JSON.stringify(this.payload));
-    console.log(this.payload.length);
-    this.payload = [];
+    this.payload.ax = [];
+    this.payload.ay = [];
+    this.payload.az = [];
+    this.payload.dt = [];
   }
 
   onDeviceData(data: any) {
@@ -50,10 +59,14 @@ export class Serial1Service {
     const payload = data.toString().split(',');
     this.socket.send('vibration', JSON.stringify(this.payload));
 
-    const date = new Date();
-    this.payload.push({
-      data: payload,
-      dt: date.getMinutes() + ':' + date.getSeconds(),
-    });
+    this.payload.ax.push(payload[0]);
+    this.payload.ay.push(payload[1]);
+    this.payload.az.push(payload[2]);
+    this.payload.dt.push(new Date());
+
+    // this.payload.push({
+    //   data: payload,
+    //   dt: date.getMinutes() + ':' + date.getSeconds(),
+    // });
   }
 }
