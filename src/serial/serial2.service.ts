@@ -26,10 +26,11 @@ export class Serial2Service {
     } catch (error) {
       console.log(error);
     }
-    // setInterval(() => {
-    //   this.readButton();
-    // }, 100);
+    setInterval(() => {
+      this.readButton();
+    }, 500);
   }
+  //@Cron(CronExpression.EVERY_SECOND)
   readButton() {
     exec(`sudo gpio-test.64 r h 19`, (error, stdout, stderr) => {
       if (error) {
