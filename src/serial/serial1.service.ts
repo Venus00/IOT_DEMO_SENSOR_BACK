@@ -57,7 +57,6 @@ export class Serial1Service {
   onDeviceData(data: any) {
     //wconsole.log('data: ', data.toString());
     const payload = data.toString().split(',');
-    this.socket.send('vibration', JSON.stringify(this.payload));
 
     this.payload.ax.push(payload[0]);
     this.payload.ay.push(payload[1]);
