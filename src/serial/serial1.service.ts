@@ -30,9 +30,8 @@ export class Serial1Service {
     }
 
     setInterval(() => {
-      console.log('test')
       this.fakeData();
-    }, 100);
+    }, 500);
   }
   fakeData() {
     this.socket.send('vibration', JSON.stringify(this.payload));
