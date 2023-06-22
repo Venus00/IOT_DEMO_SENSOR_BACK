@@ -42,6 +42,7 @@ export class Serial1Service {
   fakeData() {
     this.socket.send('vibration', JSON.stringify(this.payload));
     this.payload = [];
+    console.log(this.payload.length);
   }
 
   onDeviceData(data: any) {
