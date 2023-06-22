@@ -30,6 +30,7 @@ export class Serial1Service {
     }
 
     setInterval(() => {
+      console.log('test')
       this.fakeData();
     }, 100);
   }
