@@ -41,8 +41,8 @@ export class Serial1Service {
   @Cron(CronExpression.EVERY_SECOND)
   fakeData() {
     this.socket.send('vibration', JSON.stringify(this.payload));
-    this.payload = [];
     console.log(this.payload.length);
+    this.payload = [];
   }
 
   onDeviceData(data: any) {
