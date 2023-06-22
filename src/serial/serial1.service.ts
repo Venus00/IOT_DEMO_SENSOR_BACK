@@ -41,7 +41,7 @@ export class Serial1Service {
     const date = new Date();
     this.payload.push({
       data: payload,
-      dt: date.getHours() + date.getMinutes() + ':' + date.getMinutes(),
+      dt: date.getMinutes() + ':' + date.getMinutes(),
     });
   }
 }
