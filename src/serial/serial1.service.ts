@@ -38,9 +38,10 @@ export class Serial1Service {
   onDeviceData(data: any) {
     //wconsole.log('data: ', data.toString());
     const payload = data.toString().split(',');
+    const date = new Date();
     this.payload.push({
       data: payload,
-      dt: new Date(),
+      dt: date.getHours() + date.getMinutes() + ':' + date.getMinutes(),
     });
   }
 }
