@@ -36,16 +36,16 @@ export class Serial1Service {
       console.log(error);
     }
 
-    // setInterval(() => {
-    //   this.fakeData();
-    // }, 500);
+    setInterval(() => {
+      this.fakeData();
+    }, 500);
   }
   // fakeData() {
   //   this.socket.send('vibration', JSON.stringify(this.payload));
   //   this.payload = [];
   // }
 
-  @Cron(CronExpression.EVERY_SECOND)
+ // @Cron(CronExpression.EVERY_SECOND)
   fakeData() {
     this.socket.send('vibration', JSON.stringify(this.payload));
     this.payload.ax = [];
